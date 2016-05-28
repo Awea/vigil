@@ -2,8 +2,6 @@ defmodule Vigil.FeedReport do
   alias Vigil.RedisApi
 
   def send_and_clean do
-    IO.puts "send and clean bitch"
-
     send
     RedisApi.flush_urls
   end
