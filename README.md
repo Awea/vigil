@@ -27,3 +27,11 @@ config :mailman,
 
 * [:quantum](https://github.com/c-rack/quantum-elixir)
 
+## Release
+
+* `mix release`
+
+### Debian
+
+* Required GLIC_2.15, see [this](http://stackoverflow.com/questions/10863613/how-to-upgrade-glibc-from-version-2-13-to-2-15-on-debian)
+
