@@ -4,9 +4,9 @@
 
 ## Configuration
 
-```elixir
-# config/secret.exs
+### config/secret.exs
 
+```elixir
 use Mix.Config
 
 config :vigil,
@@ -22,3 +22,8 @@ config :mailman,
   password: "smtp_password",
   ssl: true
 ```
+
+### config/config.exs
+
+* [:quantum](https://github.com/c-rack/quantum-elixir)
+

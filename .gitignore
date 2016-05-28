@@ -17,3 +17,7 @@ erl_crash.dump
 *.ez
 
 /config/secret.exs
+
+!/rel
+/rel/*
+!/rel/relx.config
