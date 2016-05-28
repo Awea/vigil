@@ -15,7 +15,7 @@ defmodule Vigil.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {Vigil, []},
-     applications: [:logger, :httpotion]
+     applications: [:logger, :httpotion, :quantum]
     ]
   end
 
@@ -33,6 +33,7 @@ defmodule Vigil.Mixfile do
      {:httpotion, github: "myfreeweb/httpotion"},
      {:exredis, "~> 0.2.4"},
      {:mailman, "~> 0.2.2"},
-     {:slime, "~> 0.13.0"}]
+     {:slime, "~> 0.13.0"},
+     {:quantum, ">= 1.7.1"}]
   end
 end

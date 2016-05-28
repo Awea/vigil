@@ -3,9 +3,7 @@ defmodule Vigil.RedisApi do
 
   def get_urls do
     urls_keys
-    |> Enum.map(fn(key) ->
-      Repo.get(key)
-    end)
+    |> Enum.map(&Repo.get/1)
   end
 
   def flush_urls do

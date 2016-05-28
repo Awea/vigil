@@ -5,7 +5,6 @@ defmodule Mix.Tasks.Vigil.FeedReport do
   def run(_) do
     {:ok, _started} = Application.ensure_all_started(:vigil)
 
-    Vigil.FeedReport.send
-    Vigil.RedisApi.flush_urls
+    Vigil.FeedReport.send_and_clean
   end
 end
