@@ -20,6 +20,9 @@ erl_crash.dump
 
 !/rel
 /rel/*
-!/rel/relx.config
+!/rel/config.exs
 
 *.rdb
+
+# edeliver
+.deliver/releases

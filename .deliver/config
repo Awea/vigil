@@ -1,0 +1,24 @@
+# Reassigning output font colors, otherwise some text is not visible in solarized light theme.
+bldwht=${txtbld}${txtblue}
+txtwht=$(tput setaf 2)
+
+APP="vigil"
+
+BUILD_HOST="localhost"
+BUILD_USER="$USER"
+BUILD_AT="/tmp/edeliver/vigil/"
+
+STAGING_HOSTS="wearemd.com"
+STAGING_USER="$USER"
+DELIVER_TO="/var/apps/"
+
+# For *Phoenix* projects, symlink prod.secret.exs to our tmp source
+pre_erlang_get_and_update_deps() {
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    scp config/secret.exs $BUILD_USER@$BUILD_HOST:/tmp/edeliver/
+
+    __sync_remote "
+      ln -sfn '/tmp/edeliver/secret.exs' '$BUILD_AT/config/secret.exs'
+    "
+  fi
+}
