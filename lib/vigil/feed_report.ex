@@ -1,19 +1,24 @@
 defmodule Vigil.FeedReport do
   import Bamboo.Email
 
-  alias Vigil.RedisApi
+  require Slime
+  require Logger
+
+  alias Vigil.Urls
+
+  # Compile template into a function, see: https://hexdocs.pm/slime/Slime.html#function_from_file/5
+  Slime.function_from_file :def, :mail_template, "templates/feed_report.slime", [:urls]
 
   def send_and_clean do
     send
-    RedisApi.flush_urls
+    Urls.delete_all
   end
 
   def send do
-    RedisApi.get_urls |> email
+    Urls.all |> email
   end
 
-  defp email([]), do: IO.puts("no urls")
-
+  defp email([]), do: Logger.info "no urls"
   defp email(urls) do
     new_email(
       to: "david@wearemd.com",
@@ -22,9 +27,5 @@ defmodule Vigil.FeedReport do
       html_body: mail_template(urls)
     )
     |> Vigil.Mailer.deliver_now
-  end
-
-  defp mail_template(urls) do
-    File.read!("templates/feed_report.html.slim") |> Slime.render(urls: urls)
   end
 end

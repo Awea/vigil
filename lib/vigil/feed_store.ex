@@ -1,8 +1,8 @@
 defmodule Vigil.FeedStore do
-  alias Vigil.RedisApi
+  alias Vigil.Urls
 
   def process_feed do
-    get_feed |> FeederEx.parse |> filter_feed |> Enum.each(&(RedisApi.store/1))
+    get_feed |> FeederEx.parse |> filter_feed |> Enum.each(&(Urls.add/1))
   end
 
   defp get_feed do

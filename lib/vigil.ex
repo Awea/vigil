@@ -5,7 +5,7 @@ defmodule Vigil do
     import Supervisor.Spec, warn: false
 
     children = [
-      worker(Vigil.RedisRepo, [:vigil_redis]),
+      worker(Exredis, []),
     ]
 
     opts = [strategy: :one_for_one, name: Vigil.Supervisor]
