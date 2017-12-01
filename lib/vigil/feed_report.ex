@@ -1,4 +1,6 @@
 defmodule Vigil.FeedReport do
+  import Bamboo.Email
+
   alias Vigil.RedisApi
 
   def send_and_clean do
@@ -13,23 +15,16 @@ defmodule Vigil.FeedReport do
   defp email([]), do: IO.puts("no urls")
 
   defp email(urls) do
-    deliver %Mailman.Email{
-      subject: "Github feed",
+    new_email(
+      to: "david@wearemd.com",
       from: "bot@wearemd.com",
-      to: ["david@wearemd.com"],
-      html: mail_template(urls)
-    }
+      subject: "Github feed",
+      html_body: mail_template(urls)
+    )
+    |> Vigil.Mailer.deliver_now
   end
 
   defp mail_template(urls) do
     File.read!("templates/feed_report.html.slim") |> Slime.render(urls: urls)
-  end
-
-  defp deliver(email) do
-    Mailman.deliver(email, config)
-  end
-
-  def config do
-    %Mailman.Context{}
   end
 end

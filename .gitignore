@@ -21,3 +21,5 @@ erl_crash.dump
 !/rel
 /rel/*
 !/rel/relx.config
+
+*.rdb

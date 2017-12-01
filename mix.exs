@@ -1,13 +1,17 @@
 defmodule Vigil.Mixfile do
   use Mix.Project
 
+  @version "0.0.1"
+
   def project do
-    [app: :vigil,
-     version: "0.0.1",
-     elixir: "~> 1.3-dev",
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
-     deps: deps]
+    [
+      app: :vigil,
+      version: @version,
+      elixir: "~> 1.5.2",
+      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env == :prod,
+      deps: deps()
+    ]
   end
 
   # Configuration for the OTP application
@@ -15,7 +19,9 @@ defmodule Vigil.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {Vigil, []},
-     applications: [:logger, :httpotion, :quantum, :exredis, :feeder_ex, :slime, :mailman, :eex]
+      applications: [
+        :logger, :feeder_ex, :httpotion, :exredis, :bamboo, :bamboo_smtp, :slime, :quantum
+      ]
     ]
   end
 
@@ -29,15 +35,13 @@ defmodule Vigil.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:feeder_ex, "~> 0.0.2", github: "Awea/feeder_ex"},
-     {:httpotion, github: "myfreeweb/httpotion"}, # hex version bugged
-     {:exredis, "~> 0.2.4"},
-     {:mailman, "~> 0.2.2"}, # docs library always required caused warning
-     {:slime, "~> 0.13.0"}, # eex missing from applications list
-     {:quantum, ">= 1.7.1"},
-     {:exrm, "~> 1.0.5"},
-     # fix dependencies errors in exrm
-     {:cf, "~> 0.2.1", override: true},
-     {:erlware_commons, github: "erlware/erlware_commons", override: true}]
+    [
+      {:feeder_ex, "~> 1.1.0"},
+      {:httpotion, "~> 3.0.3"},
+      {:exredis, "~> 0.2.5"},
+      {:bamboo_smtp, "~> 1.4.0"}, 
+      {:slime, "~> 1.1.0"},
+      {:quantum, "~> 2.2.0"}
+    ]
   end
 end
