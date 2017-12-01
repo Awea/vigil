@@ -1,4 +1,8 @@
 defmodule Vigil.FeedReport do
+  @moduledoc """
+  This module get urls from Redis and send them in an email.
+  """
+
   import Bamboo.Email
 
   require Slime
@@ -9,11 +13,17 @@ defmodule Vigil.FeedReport do
   # Compile template into a function, see: https://hexdocs.pm/slime/Slime.html#function_from_file/5
   Slime.function_from_file :def, :mail_template, "templates/feed_report.slime", [:urls]
 
+  @doc """
+  Send the urls and remove them from Redis.
+  """
   def send_and_clean do
     send
     Urls.delete_all
   end
 
+  @doc """
+  Send the urls.
+  """
   def send do
     Urls.all |> email
   end

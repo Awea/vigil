@@ -1,16 +1,23 @@
 defmodule Vigil.FeedStore do
+  @moduledoc """
+  This module get an XML feed from GitHub, filter it, extract urls, then store them in Redis.
+  """
+
   alias Vigil.Urls
 
   def process_feed do
     get_feed |> FeederEx.parse |> filter_feed |> Enum.each(&(Urls.add/1))
   end
 
+  # Get the feed page from GitHub and return the body
   defp get_feed do
     response = HTTPotion.get github_feed
 
     response.body
   end
 
+  # Filter the feed by removing WatchEvent and some users:
+  # wearemd, awea, mmaayylliiss
   defp filter_feed({:ok, feed, _}) do
     feed.entries |> Enum.filter(fn(entry) ->
       String.contains?(entry.id, "WatchEvent") && !String.contains?(entry.link, ["wearemd", "awea", "mmaayylliiss"])
