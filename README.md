@@ -4,6 +4,10 @@
 
 ## Configuration
 
+### Get api_token_feed
+
+![get-api-token-feed](github-atom-key.gif)
+
 ### config/secret.exs
 
 ```elixir
@@ -15,23 +19,18 @@ config :vigil,
     token: "api_token_feed"
   }
 
-config :mailman,
-  relay: "smtp_server",
-  port: port_used,
+config :vigil, Vigil.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "smtp_server",
+  hostname: "domain_name",
+  port: port,
   username: "smtp_username",
   password: "smtp_password",
-  ssl: true
+  ssl: true,
+  tls: :if_available,
+  retries: 1
 ```
-
-### config/config.exs
-
-* [:quantum](https://github.com/c-rack/quantum-elixir)
 
 ## Release
 
-* `mix release`
-
-### Debian
-
-* Required GLIC_2.15, see [this](http://stackoverflow.com/questions/10863613/how-to-upgrade-glibc-from-version-2-13-to-2-15-on-debian)
-
+* `mix edeliver upgrade production`
