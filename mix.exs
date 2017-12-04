@@ -20,7 +20,7 @@ defmodule Vigil.Mixfile do
   def application do
     [mod: {Vigil, []},
       applications: [
-        :logger, :feeder_ex, :httpotion, :exredis, :bamboo, :bamboo_smtp, :slime, :quantum, :edeliver
+        :logger, :feeder_ex, :httpotion, :exredis, :bamboo, :bamboo_smtp, :slime, :quantum, :edeliver, :xmerl
       ]
     ]
   end
