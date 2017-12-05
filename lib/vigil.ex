@@ -6,6 +6,7 @@ defmodule Vigil do
 
     children = [
       worker(Exredis, []),
+      worker(Vigil.Scheduler, [])
     ]
 
     opts = [strategy: :one_for_one, name: Vigil.Supervisor]
