@@ -17,6 +17,13 @@ config :vigil,
   github: %{
     username: "username",
     token: "api_token_feed"
+  },
+  twitter: %{
+    searches: ["search one", "search two"],
+    filters: %{
+      screen_names: ["nameOne", "nameTwo"],
+      words: ["word1", "word2"]
+    }
   }
 
 config :vigil, Vigil.Mailer,
@@ -29,6 +36,14 @@ config :vigil, Vigil.Mailer,
   ssl: true,
   tls: :if_available,
   retries: 1
+
+#  Get from https://apps.twitter.com/app
+config :extwitter, :oauth, [
+   consumer_key: "consumer_key",
+   consumer_secret: "consumer_secret",
+   access_token: "access_token",
+   access_token_secret: "access_token_secret"
+]
 ```
 
 ## Release
