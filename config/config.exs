@@ -14,7 +14,7 @@ config :vigil, Vigil.Scheduler,
   timezone: "Europe/Paris",
   jobs: [
     {"@hourly"   , {Vigil.FeedStore, :process_feed, []}},
-    {"30 6 * * *", {Vigil.FeedReport, :send_and_clean, []}}
+    {"30 8 * * *", {Vigil.FeedReport, :send_and_clean, []}}
   ]
 
 # It is also possible to import configuration files, relative to this
