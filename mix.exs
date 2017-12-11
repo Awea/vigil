@@ -19,8 +19,8 @@ defmodule Vigil.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     [mod: {Vigil, []},
-      applications: [
-        :logger, :feeder_ex, :httpotion, :exredis, :bamboo, :bamboo_smtp, :slime, :quantum, :edeliver, :xmerl, :timex
+      extra_applications: [
+        :logger, :xmerl
       ]
     ]
   end
