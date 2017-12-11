@@ -1,7 +1,7 @@
 defmodule Vigil.Mixfile do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.2.0"
 
   def project do
     [
@@ -43,6 +43,9 @@ defmodule Vigil.Mixfile do
       {:slime, "~> 1.1.0"},
       {:quantum, "~> 2.2.0"},
       {:timex, "~> 3.0"},
+      {:oauther, "~> 1.1"},
+      {:extwitter, "~> 0.9.1"},
+
 
       # Build and Deployment
       {:edeliver, "~> 1.4.4"},

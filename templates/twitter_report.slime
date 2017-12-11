@@ -1,0 +1,14 @@
+h1 Twitter report
+
+ul
+  <%= for tweet <- tweets do  %>
+    li
+      strong
+        = tweet.user
+        | :
+      br 
+      = tweet.text
+      br
+      a href=(tweet.url)
+        = tweet.url
+  <% end %>
