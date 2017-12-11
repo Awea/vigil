@@ -6,14 +6,13 @@ defmodule Vigil.FeedStore do
   alias Vigil.Urls
 
   def process_feed do
-    get_feed |> FeederEx.parse |> filter_feed |> Enum.each(&(Urls.add/1))
-  end
-
-  # Get the feed page from GitHub and return the body
-  defp get_feed do
-    response = HTTPotion.get github_feed
-
-    response.body
+    github_feed()
+    |> HTTPotion.get
+    |> Map.get(:body)
+    |> FeederEx.parse 
+    |> filter_feed 
+    |> format_feed
+    |> Enum.each(&(Urls.add/1))
   end
 
   # Filter the feed by removing WatchEvent and some users:
@@ -21,9 +20,12 @@ defmodule Vigil.FeedStore do
   defp filter_feed({:ok, feed, _}) do
     feed.entries |> Enum.filter(fn(entry) ->
       String.contains?(entry.id, "WatchEvent") && !String.contains?(entry.link, ["wearemd", "awea", "mmaayylliiss"])
-    end) |> Enum.map(fn(entry) ->
-      entry.link
     end)
+  end
+
+  # Format feed to a List of Urls
+  defp format_feed(entries) do
+    Enum.map(entries, &(&1.link))
   end
 
   defp github_feed do
