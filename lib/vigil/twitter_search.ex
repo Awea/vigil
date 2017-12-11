@@ -73,7 +73,7 @@ defmodule Vigil.TwitterSearch do
   end
 
   defp filter_text(tweet) do
-    String.contains?(tweet.text, filter_value(:words))
+    !String.contains?(tweet.text, filter_value(:words))
   end
 
   defp filter_value(filter_name) do
