@@ -15,10 +15,10 @@ DELIVER_TO="/var/apps/"
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
-    scp config/secret.exs $BUILD_USER@$BUILD_HOST:/tmp/edeliver/
+    scp config/secret.exs $BUILD_USER@$BUILD_HOST:/$HOME/.edeliver/
 
     __sync_remote "
-      ln -sfn '/tmp/edeliver/secret.exs' '$BUILD_AT/config/secret.exs'
+      ln -sfn '/$HOME/.edeliver/secret.exs' '$BUILD_AT/config/secret.exs'
     "
   fi
 }

@@ -37,6 +37,7 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"M5e`|vo?Jss&bE?k7^5W4(n/~CntI*6sp=v3qJ{;w*niOZhJ2F^<3^Cq:]>V.L6U"
+  set output_dir: "rel/vigil"
 end
 
 # You may define one or more releases in this file.
