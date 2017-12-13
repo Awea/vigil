@@ -28,11 +28,12 @@ defmodule Vigil.TwitterSearch do
   Search, filter and store tweets.
   """
   def search do
-    searches
+    searches()
     |> Enum.map(&ExTwitter.search/1)
     |> Enum.concat()
     |> Enum.filter(&filter_screen_names/1)
     |> Enum.filter(&filter_text/1)
+    |> Enum.map(&original_from_rt/1)
     |> Enum.map(&format_tweet/1)
     |> Enum.each(&Tweets.add/1)
   end
@@ -75,6 +76,11 @@ defmodule Vigil.TwitterSearch do
   defp filter_text(tweet) do
     !String.contains?(String.downcase(tweet.text), filter_value(:words))
   end
+
+  # If retweeted_status is other than nil it means that it's a retweet and the original tweet is contained in
+  # retweeted_status.
+  defp original_from_rt(%ExTwitter.Model.Tweet{retweeted_status: nil} = tweet), do: tweet
+  defp original_from_rt(%ExTwitter.Model.Tweet{retweeted_status: tweet}), do: tweet
 
   defp filter_value(filter_name) do
     configutation()
