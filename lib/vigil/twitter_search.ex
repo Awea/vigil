@@ -48,13 +48,16 @@ defmodule Vigil.TwitterSearch do
     Tweets.delete_all
   end
 
+  # Emails aren't delivered through OVH SMTP if text_body is missing
+  # since 13/12/2017.
   defp email([]), do: Logger.info "no tweets"
   defp email(tweets) do
     new_email(
       to: "david@wearemd.com",
       from: "bot@wearemd.com",
       subject: "Twitter feed",
-      html_body: mail_template(tweets)
+      html_body: mail_template(tweets),
+      text_body: "see this in html"
     )
     |> Vigil.Mailer.deliver_now
   end

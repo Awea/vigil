@@ -28,13 +28,16 @@ defmodule Vigil.FeedReport do
     Urls.all |> email
   end
 
+  # Emails aren't delivered through OVH SMTP if text_body is missing
+  # since 13/12/2017.
   defp email([]), do: Logger.info "no urls"
   defp email(urls) do
     new_email(
       to: "david@wearemd.com",
       from: "bot@wearemd.com",
       subject: "Github feed",
-      html_body: mail_template(urls)
+      html_body: mail_template(urls),
+      text_body: "see this in html"
     )
     |> Vigil.Mailer.deliver_now
   end
