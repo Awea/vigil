@@ -3,6 +3,6 @@ h1 Feed report
 ul
   <%= for url <- urls do  %>
     li
-      a href=(url)
+      a href=url
         = url
   <% end %>

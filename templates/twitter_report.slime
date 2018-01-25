@@ -9,6 +9,6 @@ ul
       br 
       = tweet.text
       br
-      a href=(tweet.url)
+      a href=tweet.url
         = tweet.url
   <% end %>
