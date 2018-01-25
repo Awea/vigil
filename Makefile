@@ -1,5 +1,10 @@
-.PHONY: update_production upgrade_production help 
+.PHONY: interactive i update_production upgrade_production help 
 .DEFAULT_GOAL := help
+
+interactive: ## Start Vigil in interactive mode
+	@iex -S mix
+
+i: interactive
 
 update_production: ## Deploy from the latest commit and restart the production
 	aa mix edeliver update production --start-deploy
