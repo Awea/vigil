@@ -15,12 +15,12 @@ config :vigil, Vigil.Scheduler,
   jobs: [
     # Github
     {"@hourly"   , {Vigil.FeedStore, :process_feed, []}},
-    {"30 8 * * *", {Vigil.FeedReport, :send_and_clean, []}},
+    {"30 8 * * 1-5", {Vigil.FeedReport, :send_and_clean, []}},
 
     # Twitter
     {"*/10 * * * *", {Vigil.TwitterSearch, :search, []}},
-    {"0 12 * * 1-6", {Vigil.TwitterSearch, :report, []}},
-    {"0 18 * * 1-6", {Vigil.TwitterSearch, :report, []}}
+    {"0 12 * * 1-5", {Vigil.TwitterSearch, :report, []}},
+    {"0 18 * * 1-5", {Vigil.TwitterSearch, :report, []}}
   ]
 
 # It is also possible to import configuration files, relative to this
