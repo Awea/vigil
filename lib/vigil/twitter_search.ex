@@ -31,9 +31,9 @@ defmodule Vigil.TwitterSearch do
     searches()
     |> Enum.map(&ExTwitter.search/1)
     |> Enum.concat()
+    |> Enum.map(&original_from_rt/1)
     |> Enum.filter(&filter_screen_names/1)
     |> Enum.filter(&filter_text/1)
-    |> Enum.map(&original_from_rt/1)
     |> Enum.map(&format_tweet/1)
     |> Enum.each(&Tweets.add/1)
   end
