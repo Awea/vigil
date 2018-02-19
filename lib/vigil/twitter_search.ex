@@ -16,13 +16,13 @@ defmodule Vigil.TwitterSearch do
 
   import Bamboo.Email
 
-  require Slime
+  require EEx
   require Logger
 
   alias Vigil.Tweets
 
   # Compile template into a function, see: https://hexdocs.pm/slime/Slime.html#function_from_file/5
-  Slime.function_from_file :def, :mail_template, "templates/twitter_report.slime", [:tweets]
+  EEx.function_from_file :def, :mail_template, "templates/twitter_report.html.exs", [:tweets]
 
   @doc """
   Search, filter and store tweets.

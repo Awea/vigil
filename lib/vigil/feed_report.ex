@@ -5,13 +5,13 @@ defmodule Vigil.FeedReport do
 
   import Bamboo.Email
 
-  require Slime
+  require EEx
   require Logger
 
   alias Vigil.Urls
 
   # Compile template into a function, see: https://hexdocs.pm/slime/Slime.html#function_from_file/5
-  Slime.function_from_file :def, :mail_template, "templates/feed_report.slime", [:urls]
+  EEx.function_from_file :def, :mail_template, "templates/feed_report.html.exs", [:urls]
 
   @doc """
   Send the urls and remove them from Redis.

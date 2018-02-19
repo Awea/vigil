@@ -1,7 +1,7 @@
 defmodule Vigil.Mixfile do
   use Mix.Project
 
-  @version "0.2.5"
+  @version "0.3.0"
 
   def project do
     [
@@ -39,13 +39,11 @@ defmodule Vigil.Mixfile do
       {:feeder_ex, "~> 1.1.0"},
       {:httpotion, "~> 3.0.3"},
       {:exredis, "~> 0.2.5"},
-      {:bamboo_smtp, "~> 1.4.0"}, 
-      {:slime, "~> 1.1.0"},
+      {:bamboo_smtp, "~> 1.4.0"},
       {:quantum, "~> 2.2.0"},
       {:timex, "~> 3.0"},
       {:oauther, "~> 1.1"},
       {:extwitter, "~> 0.9.1"},
-
 
       # Build and Deployment
       {:edeliver, "~> 1.4.4"},
