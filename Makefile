@@ -1,16 +1,27 @@
-.PHONY: interactive i update_production upgrade_production help 
-.DEFAULT_GOAL := help
+.PHONY: deps
+deps: mix.exs mix.lock
+	@mix deps.get
 
-interactive: ## Start Vigil in interactive mode
+.PHONY: interactive
+interactive: deps docker_up ## Start Vigil in interactive mode
 	@iex -S mix
 
+.PHONY: i
 i: interactive
 
-update_production: ## Deploy from the latest commit and restart the production
+.PHONY: docker_up
+docker_up:
+	@docker-compose up -d
+
+.PHONY: update_production
+update_production: deps ## Deploy from the latest commit and restart the production
 	aa mix edeliver update production --start-deploy
 
-upgrade_production: ## Hot upgrade to the laster commit the production
+.PHONY: upgrade_production
+upgrade_production: deps ## Hot upgrade to the laster commit the production
 	aa mix edeliver upgrade production
 
+.PHONY: help
+.DEFAULT_GOAL := help
 help: ## This help
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
