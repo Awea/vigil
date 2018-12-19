@@ -47,7 +47,7 @@ defmodule Vigil.Mixfile do
 
       # Build and Deployment
       {:edeliver, "~> 1.4.4"},
-      {:distillery, "~> 1.5.2"}
+      {:distillery, "~> 1.5.5"}
     ]
   end
 end
