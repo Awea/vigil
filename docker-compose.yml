@@ -4,3 +4,9 @@ services:
     image: redis
     ports:
       - "6379:6379"
+
+  'elixir-build':
+    build:
+      context: .
+    ports:
+      - "2222:22"

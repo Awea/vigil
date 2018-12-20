@@ -17,6 +17,7 @@ erl_crash.dump
 *.ez
 
 /config/secret.exs
+/config/id_rsa.pub
 
 !/rel
 /rel/*

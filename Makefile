@@ -14,11 +14,11 @@ docker_up:
 	@docker-compose up -d
 
 .PHONY: update_production
-update_production: deps ## Deploy from the latest commit and restart the production
+update_production: docker_up deps ## Deploy from the latest commit and restart the production
 	aa mix edeliver update production --start-deploy
 
 .PHONY: upgrade_production
-upgrade_production: deps ## Hot upgrade to the laster commit the production
+upgrade_production: docker_up deps ## Hot upgrade to the laster commit the production
 	aa mix edeliver upgrade production
 
 .PHONY: help

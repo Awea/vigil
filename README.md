@@ -47,5 +47,15 @@ config :extwitter, :oauth, [
 ```
 
 ## Release
+### Setup
+Update your `~/.ssh/config` with:
 
-* `mix edeliver upgrade production`
+```
+Host localhost
+  Port 2222
+```
+
+Copy your `~/.ssh/id_rsa.pub` to `config/id_rsa.pub`.
+
+### Usage
+`make upgrade_production`
