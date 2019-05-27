@@ -2,6 +2,9 @@
 deps: mix.exs mix.lock
 	@mix deps.get
 
+config/id_rsa.pub:
+	@cp $(HOME)/.ssh/id_rsa.pub config/id_rsa.pub
+
 .PHONY: interactive
 interactive: deps docker_up ## Start Vigil in interactive mode
 	@iex -S mix
@@ -10,7 +13,7 @@ interactive: deps docker_up ## Start Vigil in interactive mode
 i: interactive
 
 .PHONY: docker_up
-docker_up:
+docker_up: config/id_rsa.pub
 	@docker-compose up -d
 
 .PHONY: update_production
