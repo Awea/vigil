@@ -5,8 +5,8 @@ txtwht=$(tput setaf 2)
 APP="vigil"
 
 BUILD_HOST="localhost"
-BUILD_USER="builder"
-BUILD_AT="/home/$BUILD_USER/$APP/"
+BUILD_USER="root"
+BUILD_AT="/$BUILD_USER/$APP/"
 
 PRODUCTION_HOSTS="wearemd.com"
 PRODUCTION_USER="root"
@@ -15,10 +15,10 @@ DELIVER_TO="/var/apps/"
 # For *Phoenix* projects, symlink prod.secret.exs to our tmp source
 pre_erlang_get_and_update_deps() {
   if [ "$TARGET_MIX_ENV" = "prod" ]; then
-    scp config/secret.exs $BUILD_USER@$BUILD_HOST:/home/$BUILD_USER/
+    scp config/secret.exs $BUILD_USER@$BUILD_HOST:/$BUILD_USER/
 
     __sync_remote "
-      ln -sfn '/home/$BUILD_USER/secret.exs' '$BUILD_AT/config/secret.exs'
+      ln -sfn '/$BUILD_USER/secret.exs' '$BUILD_AT/config/secret.exs'
     "
   fi
 }
